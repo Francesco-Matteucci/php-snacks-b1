@@ -51,7 +51,19 @@ $prefLanguage = isset($_GET['preferred_language']) && $_GET['preferred_language'
         </h2>
         <?php } ?>
 
-        <?php foreach ($classi as $classe => $studenti) { ?>
+        <?php foreach ($classi as $classe => $studenti) { 
+            $showClass = false;
+
+            // Verifico se ci sono studenti che soddisfano i criteri di filtraggio
+            foreach ($studenti as $studente) {
+                if (($maxGrade === null || $studente['voto_medio'] < $maxGrade) && 
+                    ($prefLanguage === null || strtolower($studente['linguaggio_preferito']) === strtolower($prefLanguage))) {
+                    $showClass = true;
+                }
+            }
+
+            // Mostro la classe solo se ci sono studenti che soddisfano i criteri del filtraggio
+            if ($showClass) { ?>
         <h3 class="mt-4"><?= $classe ?></h3>
         <div class="row justify-content-center">
             <?php foreach ($studenti as $studente) { 
@@ -80,6 +92,7 @@ $prefLanguage = isset($_GET['preferred_language']) && $_GET['preferred_language'
             <?php } ?>
             <?php } ?>
         </div>
+        <?php } ?>
         <?php } ?>
     </div>
 
