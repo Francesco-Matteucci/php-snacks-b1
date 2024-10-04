@@ -1,0 +1,15 @@
+
+.teachers {
+    background-color: lightgray;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.pm {
+    background-color: lightgreen;
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+}
