@@ -9,7 +9,7 @@ if (isset($_GET['name']) && isset($_GET['mail']) && isset($_GET['age'])) {
 
     $validName = strlen($name) > 3;
 
-    $validMail = strpos($mail, '@') !== false && strpos($mail, '.') !== false;
+    $validMail = str_contains($mail, '@') && str_contains($mail, '.');
 
     $validAge = is_numeric($age);
 
