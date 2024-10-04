@@ -19,6 +19,8 @@ $prefLanguage = isset($_GET['preferred_language']) && $_GET['preferred_language'
     <!-- Bootstrap style -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom style -->
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -51,7 +53,7 @@ $prefLanguage = isset($_GET['preferred_language']) && $_GET['preferred_language'
 
         <?php foreach ($classi as $classe => $studenti) { ?>
         <h3 class="mt-4"><?= $classe ?></h3>
-        <div class="row justify-content-between">
+        <div class="row justify-content-center">
             <?php foreach ($studenti as $studente) { 
 
 
@@ -59,7 +61,6 @@ $prefLanguage = isset($_GET['preferred_language']) && $_GET['preferred_language'
                 // if ($studente['voto_medio'] >= 6) {
                 //     echo "<li>{$studente['nome']} {$studente['cognome']} ~ Età: {$studente['anni']} ~ Voto medio: {$studente['voto_medio']}</li>";
                 // }
-                
 
                 // Controllo per il voto medio massimo e il linguaggio preferito
                 if (($maxGrade === null || $studente['voto_medio'] < $maxGrade) && 
@@ -69,7 +70,7 @@ $prefLanguage = isset($_GET['preferred_language']) && $_GET['preferred_language'
                     <img src="https://robohash.org/<?= $studente['nome'] ?>" class="card-img-top img-fluid"
                         alt="Foto di <?= $studente['nome'] ?>">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $studente['nome'] . ' ' . $studente['cognome'] ?></h5>
+                        <h6 class="card-title"><?= $studente['nome'] . ' ' . $studente['cognome'] ?></h6>
                         <p class="card-text">Età: <?= $studente['anni'] ?></p>
                         <p class="card-text">Voto medio: <?= $studente['voto_medio'] ?></p>
                         <p class="card-text">Linguaggio preferito: <?= $studente['linguaggio_preferito'] ?></p>
