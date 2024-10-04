@@ -1,8 +1,11 @@
 <?php
 require_once __DIR__ . '/classes.php';
 
-// Se presente, recupero il voto massimo dall'input dell'utente
-$maxGrade = isset($_GET['max_grade']) ? $_GET['max_grade'] : null;
+// Se presente, recupero il voto massimo dall'input dell'utente. Se il campo è vuoto, il filtro non verrà applicato
+$maxGrade = isset($_GET['max_grade']) && $_GET['max_grade'] !== '' ? $_GET['max_grade'] : null;
+
+// Se presente, recupero il linguaggio preferito dall'input dell'utente. Se il campo è vuoto, il filtro non verrà applicato
+$prefLanguage = isset($_GET['preferred_language']) && $_GET['preferred_language'] !== '' ? $_GET['preferred_language'] : null;
 ?>
 
 
@@ -29,11 +32,21 @@ $maxGrade = isset($_GET['max_grade']) ? $_GET['max_grade'] : null;
                 <input type="number" id="max_grade" name="max_grade" class="form-control" value="<?= $maxGrade ?>"
                     step="0.1">
             </div>
+
+            <div class="mb-3">
+                <label for="preferred_language" class="form-label">Inserisci un linguaggio preferito:</label>
+                <input type="text" id="preferred_language" name="preferred_language" class="form-control"
+                    value="<?= $prefLanguage ?>">
+            </div>
+
             <button type="submit" class="btn btn-primary w-100">Filtra</button>
         </form>
 
-        <?php if ($maxGrade !== null) { ?>
-        <h2 class="text-center">Studenti con il voto medio inferiore a <?= $maxGrade ?></h2>
+        <?php if ($maxGrade !== null || $prefLanguage !== null) { ?>
+        <h2 class="text-center">
+            <?php if ($maxGrade !== null) { ?> Studenti con il voto medio inferiore a <?= $maxGrade ?><?php } ?><br>
+            <?php if ($prefLanguage !== null) { ?> Linguaggio preferito: <?= $prefLanguage ?><?php } ?>
+        </h2>
         <?php } ?>
 
         <?php foreach ($classi as $classe => $studenti) { ?>
@@ -48,11 +61,12 @@ $maxGrade = isset($_GET['max_grade']) ? $_GET['max_grade'] : null;
                     // }
 
                     
-                    // Controllo per il voto medio massimo
-                    if ($maxGrade === null || $studente['voto_medio'] < $maxGrade) { ?>
+                    // Controllo per il voto medio massimo e il linguaggio preferito
+                    if (($maxGrade === null || $studente['voto_medio'] < $maxGrade) && 
+                        ($prefLanguage === null || strtolower($studente['linguaggio_preferito']) === strtolower($prefLanguage))) { ?>
             <li class="list-group-item">
                 <?= $studente['nome'] . ' ' . $studente['cognome'] ?> ~ Età: <?= $studente['anni'] ?> ~ Voto medio:
-                <?= $studente['voto_medio'] ?>
+                <?= $studente['voto_medio'] ?> ~ Linguaggio preferito: <?= $studente['linguaggio_preferito'] ?>
             </li>
             <?php } ?>
             <?php } ?>
