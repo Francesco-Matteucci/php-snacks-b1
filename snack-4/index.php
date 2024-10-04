@@ -51,26 +51,34 @@ $prefLanguage = isset($_GET['preferred_language']) && $_GET['preferred_language'
 
         <?php foreach ($classi as $classe => $studenti) { ?>
         <h3 class="mt-4"><?= $classe ?></h3>
-        <ul class="list-group">
+        <div class="row justify-content-between">
             <?php foreach ($studenti as $studente) { 
 
 
-                    // CONTROLLO DEL VOTO MEDIO SUFFICIENTE IN RIFERIMENTO ALLO SNACK 4B:
-                    // if ($studente['voto_medio'] >= 6) {
-                    //     echo "<li>{$studente['nome']} {$studente['cognome']} ~ Età: {$studente['anni']} ~ Voto medio: {$studente['voto_medio']}</li>";
-                    // }
+                // CONTROLLO DEL VOTO MEDIO SUFFICIENTE IN RIFERIMENTO ALLO SNACK 4B:
+                // if ($studente['voto_medio'] >= 6) {
+                //     echo "<li>{$studente['nome']} {$studente['cognome']} ~ Età: {$studente['anni']} ~ Voto medio: {$studente['voto_medio']}</li>";
+                // }
+                
 
-                    
-                    // Controllo per il voto medio massimo e il linguaggio preferito
-                    if (($maxGrade === null || $studente['voto_medio'] < $maxGrade) && 
-                        ($prefLanguage === null || strtolower($studente['linguaggio_preferito']) === strtolower($prefLanguage))) { ?>
-            <li class="list-group-item">
-                <?= $studente['nome'] . ' ' . $studente['cognome'] ?> ~ Età: <?= $studente['anni'] ?> ~ Voto medio:
-                <?= $studente['voto_medio'] ?> ~ Linguaggio preferito: <?= $studente['linguaggio_preferito'] ?>
-            </li>
+                // Controllo per il voto medio massimo e il linguaggio preferito
+                if (($maxGrade === null || $studente['voto_medio'] < $maxGrade) && 
+                    ($prefLanguage === null || strtolower($studente['linguaggio_preferito']) === strtolower($prefLanguage))) { ?>
+            <div class="col-md-6 col-lg-3 col-xl-2">
+                <div class="card mb-4">
+                    <img src="https://robohash.org/<?= $studente['nome'] ?>" class="card-img-top img-fluid"
+                        alt="Foto di <?= $studente['nome'] ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $studente['nome'] . ' ' . $studente['cognome'] ?></h5>
+                        <p class="card-text">Età: <?= $studente['anni'] ?></p>
+                        <p class="card-text">Voto medio: <?= $studente['voto_medio'] ?></p>
+                        <p class="card-text">Linguaggio preferito: <?= $studente['linguaggio_preferito'] ?></p>
+                    </div>
+                </div>
+            </div>
             <?php } ?>
             <?php } ?>
-        </ul>
+        </div>
         <?php } ?>
     </div>
 
