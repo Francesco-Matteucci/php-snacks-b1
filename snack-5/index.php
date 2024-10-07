@@ -1,11 +1,18 @@
 <?php
 require_once __DIR__ . '/functions.php';
 
-$palindromeResult = null; 
-if (isset($_GET['word'])) {
-    $word = $_GET['word'];
-    $palindromeResult = isPalindromeWord($word);
+// $palindromeResult = null; 
+// if (isset($_GET['word'])) {
+//     $word = $_GET['word'];
+//     $palindromeResult = isPalindromeWord($word);
+// }
+
+$palindromeResult = null;
+if (isset($_GET['text'])) {
+    $text = $_GET['text'];
+    $palindromeResult = isPalindromeText($text);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +33,8 @@ if (isset($_GET['word'])) {
         <h1 class="mb-3">Snack 5 - E' Palindroma?</h1>
         <form method="GET" action="index.php">
             <div class="mb-3">
-                <label for="word" class="form-label">Metti una parola:</label>
-                <input type="text" class="form-control" id="word" name="word" required>
+                <label for="text" class="form-label">Inserisci un testo da verificare:</label>
+                <input type="text" class="form-control" id="text" name="text" required>
             </div>
             <button type="submit" class="btn btn-primary">Controlla</button>
         </form>
@@ -36,9 +43,9 @@ if (isset($_GET['word'])) {
         <div class="mt-3">
             <p>
                 <?php if ($palindromeResult) { ?>
-                <span class="text-success">The word is a palindrome.</span>
+                <span class="text-success">Palindroma.</span>
                 <?php } else { ?>
-                <span class="text-danger">The word is not a palindrome.</span>
+                <span class="text-danger">Non palindroma.</span>
                 <?php } ?>
             </p>
         </div>

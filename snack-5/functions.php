@@ -11,4 +11,20 @@ function isPalindromeWord($word) {
 
     return $word === $reversedWord;
 }
+
+
+function isPalindromeText($text) {
+    $text = strtolower($text);
+
+    $cleanedText = str_replace([' ', ',', '.', '!', '?', '-', '_'], '', $text);
+
+    $reversedText = '';
+    $length = strlen($cleanedText);
+
+    for ($i = $length - 1; $i >= 0; $i--) {
+        $reversedText .= $cleanedText[$i];
+    }
+
+    return $cleanedText === $reversedText;
+}
 ?>
